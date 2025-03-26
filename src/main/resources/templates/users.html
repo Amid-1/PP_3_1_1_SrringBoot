@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Список пользователей</title>
+    <title>Пользователи</title>
 </head>
 <body>
 
@@ -17,27 +17,24 @@
         <th>Пароль</th>
         <th>Действия</th>
     </tr>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.username}"></td>
-        <td th:text="${user.lastName}"></td>
-        <td th:text="${user.email}"></td>
+    <tr th:each="userDto : ${userDtos}">
+        <td th:text="${userDto.id}"></td>
+        <td th:text="${userDto.username}"></td>
+        <td th:text="${userDto.lastName}"></td>
+        <td th:text="${userDto.email}"></td>
+        <td th:text="${userDto.password}"></td>
         <td>
-            <input type="text" th:value="${user.password}" readonly>
-        </td>
-        <td>
-            <form th:action="@{/users/update}" method="post">
-                <input type="hidden" name="id" th:value="${user.id}">
-                <input type="text" name="username" th:value="${user.username}" placeholder="Имя пользователя" required>
-                <input type="text" name="lastName" th:value="${user.lastName}" placeholder="Фамилия" required>
-                <input type="email" name="email" th:value="${user.email}" placeholder="Email" required>
-                <input type="text" name="password" th:value="${user.password}" placeholder="Пароль" required>
-                <input type="submit" value="Изменить">
+            <form th:action="@{/users/update}" method="post" th:object="${userDto}" style="display:inline;">
+                <input type="hidden" th:field="*{id}"/>
+                <input type="hidden" th:field="*{username}"/>
+                <input type="hidden" th:field="*{lastName}"/>
+                <input type="hidden" th:field="*{email}"/>
+                <input type="hidden" th:field="*{password}"/>
+                <button type="submit">Обновить</button>
             </form>
-
-            <form th:action="@{/users/delete}" method="post">
-                <input type="hidden" name="id" th:value="${user.id}">
-                <input type="submit" value="Удалить">
+            <form th:action="@{/users/delete}" method="post" style="display:inline;">
+                <input type="hidden" name="id" th:value="${userDto.id}" />
+                <button type="submit">Удалить</button>
             </form>
         </td>
     </tr>
@@ -45,11 +42,11 @@
 
 <h3>Добавить пользователя</h3>
 <form th:action="@{/users/save}" method="post" th:object="${userDto}">
-    <input type="text" th:field="*{username}" placeholder="Имя пользователя" required>
-    <input type="text" th:field="*{lastName}" placeholder="Фамилия" required>
-    <input type="email" th:field="*{email}" placeholder="Email" required>
-    <input type="text" th:field="*{password}" placeholder="Пароль" required>
-    <input type="submit" value="Добавить">
+    <input type="text" th:field="*{username}" placeholder="Имя пользователя"/>
+    <input type="text" th:field="*{lastName}" placeholder="Фамилия"/>
+    <input type="email" th:field="*{email}" placeholder="Email"/>
+    <input type="text" th:field="*{password}" placeholder="Пароль"/>
+    <input type="submit" value="Добавить"/>
 </form>
 
 </body>
