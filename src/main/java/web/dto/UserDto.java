@@ -1,10 +1,22 @@
 package web.dto;
 
+import javax.validation.constraints.*;
+
 public class UserDto {
     private Long id;
+
+    @NotBlank(message = "Имя не может быть пустым")
     private String username;
+
+    @NotBlank(message = "Фамилия не может быть пустой")
     private String lastName;
+
+    @NotBlank(message = "Email не может быть пустым")
+    @Email(message = "Некорректный email")
     private String email;
+
+    @NotBlank(message = "Пароль не может быть пустым")
+    @Size(min = 6, message = "Пароль должен быть не менее 6 символов")
     private String password;
 
     public UserDto() {}

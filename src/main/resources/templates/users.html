@@ -44,11 +44,11 @@
 </table>
 
 <h3>Добавить пользователя</h3>
-<form th:action="@{/users/save}" method="post">
-    <input type="text" name="username" placeholder="Имя пользователя" required>
-    <input type="text" name="lastName" placeholder="Фамилия" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="text" name="password" placeholder="Пароль" required>
+<form th:action="@{/users/save}" method="post" th:object="${userDto}">
+    <input type="text" th:field="*{username}" placeholder="Имя пользователя" required>
+    <input type="text" th:field="*{lastName}" placeholder="Фамилия" required>
+    <input type="email" th:field="*{email}" placeholder="Email" required>
+    <input type="text" th:field="*{password}" placeholder="Пароль" required>
     <input type="submit" value="Добавить">
 </form>
 

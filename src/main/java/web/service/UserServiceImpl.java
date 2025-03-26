@@ -5,6 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 import web.dto.UserDto;
 import web.model.User;
 import web.repositories.UserRepository;
+
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +36,8 @@ public class UserServiceImpl implements UserService {
     public void saveUser(UserDto userDto) {
         User user;
         if (userDto.getId() != null) {
-            user = userRepository.findById(userDto.getId()).orElse(new User());
+            user = userRepository.findById(userDto.getId())
+                    .orElseThrow(() -> new EntityNotFoundException("Пользователь с ID " + userDto.getId() + " не найден"));
         } else {
             user = new User();
         }
@@ -65,6 +68,6 @@ public class UserServiceImpl implements UserService {
                         user.getEmail(),
                         user.getPassword()
                 ))
-                .orElse(null);
+                .orElseThrow(() -> new EntityNotFoundException("Пользователь с ID " + id + " не найден"));
     }
 }
