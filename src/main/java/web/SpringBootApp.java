@@ -9,3 +9,5 @@ public class SpringBootApp {
         SpringApplication.run(SpringBootApp.class, args);
     }
 }
+
+// ввести в браузере:    http://localhost:8080/users
