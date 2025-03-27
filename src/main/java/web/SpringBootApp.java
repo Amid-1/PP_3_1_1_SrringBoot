@@ -10,4 +10,4 @@ public class SpringBootApp {
     }
 }
 
-// ввести в браузере:    http://localhost:8080/users
+// ввести в браузере:    http://localhost:8080/my_table
