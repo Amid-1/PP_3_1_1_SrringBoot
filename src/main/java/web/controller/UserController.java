@@ -29,7 +29,7 @@ public class UserController {
                            BindingResult result,
                            Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("users", userService.getAllUsers());
+            model.addAttribute("userDtos", userService.getAllUsers());
             return "users";
         }
 
@@ -42,7 +42,7 @@ public class UserController {
                              BindingResult result,
                              Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("users", userService.getAllUsers());
+            model.addAttribute("userDtos", userService.getAllUsers());
             return "users";
         }
         userService.saveUser(userDto);
